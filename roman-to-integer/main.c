@@ -1,6 +1,4 @@
-#include <stdio.h>
 #include <string.h>
-#include <threads.h>
 
 // Return value associated with roman numeral
 int returnRomanNumberialValue(char c){
@@ -33,14 +31,11 @@ int romanToInt(char* s) {
 
     // Calculate the value of a string of roman numerial
     for(int i = 0; i < length; i++) {
-        printf("s[i] equals %c which equals %d\n", s[i], returnRomanNumberialValue(s[i]));
         if(s[i+1] != '\0' && returnRomanNumberialValue(s[i]) < returnRomanNumberialValue(s[i+1])){
-            printf("[FIRST] The value about to be added to sum is %d\n", sum+returnRomanNumberialValue(s[i+1]+returnRomanNumberialValue(s[i])));
             sum += returnRomanNumberialValue(s[i+1]) - returnRomanNumberialValue(s[i]);
             i++;
         }
         else{
-            printf("[SECOND] The value about to be added to sum is %d\n", sum+returnRomanNumberialValue(s[i]));
             sum += returnRomanNumberialValue(s[i]);
         }
     }
@@ -48,10 +43,7 @@ int romanToInt(char* s) {
 }
 
 int main(void) {
-
     char s[] = "MCMLXXXIV"; // Should be 1994
-
-    printf("The sum of the string is %d\n", romanToInt(s));
 
     return 0;
 }
