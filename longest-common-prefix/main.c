@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 
@@ -5,17 +6,24 @@ char* longestCommonPrefix(char** strs, int strsSize) {
 
     char buffer[201] = "";
 
-    printf("What is this %s\n", strs[0]);
-
-    printf("What is this %s\n", strs[0][0]);
-
-    for(int i = 0; i < strsSize; i++) {
-        int stringSize = strlen(strs[0]);
-        for(int j = 0; j < stringSize; j++) {
-
+    char* prefix = {"\0"};
+    for(int i = 0; i < strsSize; i++){
+        for(int j = 0; j < strsSize; j++){
+            printf("What is strs[%d][%d] : %c\n", j,i, strs[j][i]);
         }
     }
+
+    printf("What is the value of prefix : %s\n", prefix);
+
+    return prefix;
 }
+
+/*
+unsigned int appendStringToArray(char **strs, const char *str, int *strsSize) {
+
+    char **temp = realloc(void *, unsigned long)
+}
+*/
 
 int main(void) {
 
