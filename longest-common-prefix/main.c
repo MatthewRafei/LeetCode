@@ -5,17 +5,18 @@
 char* longestCommonPrefix(char** strs, int strsSize) {
 
     char buffer[201] = "";
+    char c;
+    int n = 0, i = 0;
 
-    char* prefix = {"\0"};
-    for(int i = 0; i < strsSize; i++){
-        for(int j = 0; j < strsSize; j++){
-            printf("What is strs[%d][%d] : %c\n", j,i, strs[j][i]);
-        }
+    if(strsSize == 0) {
+        return "";
     }
 
-    printf("What is the value of prefix : %s\n", prefix);
 
-    return prefix;
+
+
+
+    return strs[0];
 }
 
 /*
