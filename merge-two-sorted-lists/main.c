@@ -4,7 +4,9 @@
  *     int val;
  *     struct ListNode *next;
  * };
- */
+n */
+
+// Make sure both lists are not empty
 
 #include <stdio.h>
 
@@ -14,9 +16,22 @@ struct ListNode {
 };
 
 struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
-  struct ListNode arr[6];
+
+  // Account for the possibility that lists may be empty
+  if(list1 == NULL && list2 == NULL) {
+    return NULL;
+  }
+
+  if(list1 == NULL) {
+    return list2;
+  }
+
+  if(list2 == NULL) {
+    return list1;
+  }
+
+  struct ListNode *arr[100];
   struct ListNode *n = list1;
-  int i = 0;
 
   // Get to the end of the first list
   while(n->next != NULL) {
@@ -25,18 +40,10 @@ struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
 
   // Combine lists
   n->next = list2;
-  n = list1;
-  i = 0;
 
-  // Put list in array
-  while(n != NULL) {
-    arr[i++] = *n;
-    n = n->next;
-  }
+  
 
-  for(;i >= 0; i--) {
-    printf("What is the value in the array at index %d : %d\n", i, arr[i]);
-  }
+  
 }
 
 int main(void) {
