@@ -9,13 +9,31 @@ n */
 // Make sure both lists are not empty
 
 #include <stdio.h>
+#include <stdlib.h>
 
 struct ListNode {
   int val;
   struct ListNode *next;
 };
 
-struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
+typedef struct ListNode Node;
+
+Node* createNode(int num) {
+  Node* node = malloc(sizeof(Node));
+  node->val = num;
+  node->next = NULL;
+  return node;
+}
+
+void appendNode(Node* head, Node* node) {
+  Node* n = head;
+  while(n->next != NULL){
+    n = n->next;
+  }
+  n->next = node;
+}
+
+Node* mergeTwoLists(Node* list1, Node* list2) {
 
   // Account for the possibility that lists may be empty
   if(list1 == NULL && list2 == NULL) {
@@ -30,8 +48,8 @@ struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
     return list1;
   }
 
-  struct ListNode *arr[100];
-  struct ListNode *n = list1;
+  int arr[100];
+  Node *n = list1;
 
   // Get to the end of the first list
   while(n->next != NULL) {
@@ -41,40 +59,47 @@ struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
   // Combine lists
   n->next = list2;
 
+  // reset n to head
+  n = list1;
+
+  // Get size of combined linked list and put int elems into array
   int sizeOfList = 0;
-  while(n->next != NULL) {
+  while(n != NULL) {
+    arr[sizeOfList] = n->val;
     n = n->next;
     sizeOfList++;
   }
-
-
-  struct ListNode *min = NULL;
-
-  n = list1;
   
-  while(sizeOfList > 0) {
-
-    if(n == NULL){
-      n = list1;
+  int x = 0;
+  for(int i = 0; i < sizeOfList; i++) {
+    for(int j = i + 1; j < sizeOfList; j++) {
+      if(arr[i] > arr[j]) {
+        x = arr[i];
+        arr[i] = arr[j];
+        arr[j] = x;
+      }
     }
+  }
 
-    
-    
+  for(int i = 0; i < sizeOfList; i++) {
+    printf("What is the val in index %d in array : %d\n", i, arr[i]);
   }
   
 
-  
-    
-    
+  Node* head = createNode(arr[0]);
 
-  
+  for(int i = 1; i < sizeOfList; i++) {
+    appendNode(head, createNode(arr[i]));
+  }
+
+  return head;
 }
 
 int main(void) {
 
-  struct ListNode list1;
-  struct ListNode list1_1;
-  struct ListNode list1_2;
+  Node list1;
+  Node list1_1;
+  Node list1_2;
   
   list1.val = 1;
   list1_1.val = 2;
@@ -84,9 +109,9 @@ int main(void) {
   list1_1.next = &list1_2;
   list1_2.next = NULL;
 
-  struct ListNode list2;
-  struct ListNode list2_1;
-  struct ListNode list2_2;
+  Node list2;
+  Node list2_1;
+  Node list2_2;
 
   list2.val = 1;
   list2_1.val = 3;
@@ -97,7 +122,13 @@ int main(void) {
   list2_2.next = NULL;
   
 
-  mergeTwoLists(&list1, &list2);
+  /* mergeTwoLists(&list1, &list2); */
+
+  Node* n = mergeTwoLists(&list1, &list2);
+  while(n != NULL) {
+    printf("Value of node %d\n", n->val);
+    n = n->next;
+  }
   
   return 0;
 }
