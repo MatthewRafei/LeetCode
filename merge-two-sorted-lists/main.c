@@ -41,7 +41,31 @@ struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
   // Combine lists
   n->next = list2;
 
+  int sizeOfList = 0;
+  while(n->next != NULL) {
+    n = n->next;
+    sizeOfList++;
+  }
+
+
+  struct ListNode *min = NULL;
+
+  n = list1;
   
+  while(sizeOfList > 0) {
+
+    if(n == NULL){
+      n = list1;
+    }
+
+    
+    
+  }
+  
+
+  
+    
+    
 
   
 }
