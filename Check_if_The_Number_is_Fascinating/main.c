@@ -18,38 +18,31 @@ bool isFascinating(int n) {
   int tempRes = 0;
   int result = 0;
 
-  int a,b,c,d,e,f,g,h,i = 0;
-
   tempRes = concateNums(n, x);
   result = concateNums(tempRes, y);
 
-  while(result != 0) {
-    
-    switch(result) {
-    case 0:
+  int count = 0;
+  
+  for(int i = 0; i < 9; i++) {
+
+    if( 1 <= result % 10 && result % 10 <= 9) {
+      
+    }
+      
+    if(result % 10 == 0) {
       return false;
-    case 1:
-      a++;
-      break;
-    case 2:
-      b++;
-      break;
-    case 3:
     }
     
-     
-      
-
-
     result /= 10;
   }
-  
+
+
+  printf("%d\n", count);
 }
 
 
 int main(void) {
   
   printf("Is fascinating : %d\n", isFascinating(192));
- 
   return 0;
 }
